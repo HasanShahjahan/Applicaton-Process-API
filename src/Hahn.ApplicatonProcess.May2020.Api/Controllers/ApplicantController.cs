@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Hahn.ApplicatonProcess.May2020.Domain.Interfaces;
 using Hahn.ApplicatonProcess.May2020.Domain.Models;
+using Hahn.ApplicatonProcess.May2020.Domain.Validators;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hahn.ApplicatonProcess.May2020.Api.Controllers
@@ -10,9 +11,11 @@ namespace Hahn.ApplicatonProcess.May2020.Api.Controllers
     public class ApplicantController : ControllerBase
     {
         private readonly IApplicantManager _applicantManager;
-        public ApplicantController(IApplicantManager applicantManager)
+        private readonly IValidationManager _validationManager;
+        public ApplicantController(IApplicantManager applicantManager, IValidationManager validationManager)
         {
             _applicantManager = applicantManager;
+            _validationManager = validationManager;
         }
 
         
@@ -28,6 +31,11 @@ namespace Hahn.ApplicatonProcess.May2020.Api.Controllers
         [Consumes("application/json")]
         public async Task<IActionResult> Post([FromBody] ApplicantModel request)
         {
+            var validationResult = _validationManager.Validate(new ApplicantModelValidator(), request);
+            if (validationResult.Errors.Count > 0)
+            {
+                return Ok(validationResult.Errors);    
+            }
             var result = await _applicantManager.CreateApplicantAsync(request);
             return Ok(result);
         }

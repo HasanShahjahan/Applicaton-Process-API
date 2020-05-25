@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FluentValidation.AspNetCore;
 using Hahn.ApplicatonProcess.May2020.Data.Base;
 using Hahn.ApplicatonProcess.May2020.Data.DbContext;
 using Hahn.ApplicatonProcess.May2020.Data.Repositories;
@@ -33,6 +34,8 @@ namespace Hahn.ApplicatonProcess.May2020.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddMvc().AddFluentValidation();
+            services.AddTransient<IValidationManager, ValidationManager>();
             services.AddTransient<IApplicantManager, ApplicantManager>();
             services.AddTransient<IGenericRepository<Applicant>, GenericRepository<Applicant>>();
             services.AddTransient<ApplicantRepository>();
