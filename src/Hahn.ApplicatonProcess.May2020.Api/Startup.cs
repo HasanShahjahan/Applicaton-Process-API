@@ -35,6 +35,7 @@ namespace Hahn.ApplicatonProcess.May2020.Api
         {
             services.AddControllers();
             services.AddMvc().AddFluentValidation();
+            services.AddHttpClient();
             services.AddTransient<IValidationManager, ValidationManager>();
             services.AddTransient<IApplicantManager, ApplicantManager>();
             services.AddTransient<IGenericRepository<Applicant>, GenericRepository<Applicant>>();
