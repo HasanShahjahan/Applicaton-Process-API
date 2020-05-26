@@ -2,7 +2,6 @@
 using Hahn.ApplicatonProcess.May2020.Domain.Interfaces;
 using Hahn.ApplicatonProcess.May2020.Domain.Mappers;
 using Hahn.ApplicatonProcess.May2020.Domain.Models;
-using Hahn.ApplicatonProcess.May2020.Entities;
 using System;
 using System.Threading.Tasks;
 
@@ -11,24 +10,30 @@ namespace Hahn.ApplicatonProcess.May2020.Domain.Managers
     public class ApplicantManager : IApplicantManager
     {
         private readonly ApplicantRepository _applicantRepository;
+        private readonly IErrorMapper _errorMapper;
 
-        public ApplicantManager(ApplicantRepository applicantRepository)
+        public ApplicantManager(ApplicantRepository applicantRepository, IErrorMapper errorMapper)
         {
             _applicantRepository = applicantRepository;
+            _errorMapper = errorMapper;
         }
 
-        public async Task<ApplicantModel> CreateApplicantAsync(ApplicantModel model)
+        public async Task<ServerResponse> CreateApplicantAsync(ApplicantModel model)
         {
+            var response = ServerResponse.OK;
             var applicant = await _applicantRepository.GetItemByIdAsync(model.ID);
-            if (applicant != null) throw new HahnExceptionManager(400, "Already exists in system.");
-            var applicantEntity = await _applicantRepository.AddAsync(model.ToCommand());
-            return applicantEntity.ToQueries();
+            if (applicant != null)
+                return _errorMapper.MapToError(ServerResponse.BadRequest, "Already exists in system.");
+            await _applicantRepository.AddAsync(model.ToCommand());
+            return response;
         }
 
-        public async Task<ApplicantModel> UpdateApplicantAsync(int id, ApplicantModel model)
+        public async Task<ServerResponse> UpdateApplicantAsync(int id, ApplicantModel model)
         {
+            var response = ServerResponse.OK;
             var applicant = await _applicantRepository.GetItemByIdAsync(id);
-            if (applicant == null) throw new HahnExceptionManager(400, "Doesn't exist in system.");
+            if (applicant == null) 
+                return _errorMapper.MapToError(ServerResponse.BadRequest, "Applicant doesn't exist in system.");
             
             applicant.Name = model.Name;
             applicant.FamilyName = model.FamilyName;
@@ -40,16 +45,18 @@ namespace Hahn.ApplicatonProcess.May2020.Domain.Managers
             applicant.Hired = model.Hired;
             applicant.EMailAdress = model.EMailAdress;
 
-            var applicantEntity = await _applicantRepository.UpdateAsync(applicant);
-            return applicantEntity.ToQueries();
+            await _applicantRepository.UpdateAsync(applicant);
+            return response;
         }
 
-        public async Task<ApplicantModel> DeleteApplicantAsync(int id)
+        public async Task<ServerResponse> DeleteApplicantAsync(int id)
         {
+            var response = ServerResponse.OK;
             var applicant = await _applicantRepository.GetItemByIdAsync(id);
-            if (applicant == null) throw new HahnExceptionManager(401, "Doesn't exist in system.");
-            var applicantEntity = await _applicantRepository.RemoveAsync(applicant);
-            return applicantEntity.ToQueries();
+            if (applicant == null)
+                return _errorMapper.MapToError(ServerResponse.BadRequest, "Applicant doesn't exist in system.");
+            await _applicantRepository.RemoveAsync(applicant);
+            return response;
         }
 
         public async Task<ApplicantModel> GetApplicantAsync(int Id)

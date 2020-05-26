@@ -8,6 +8,7 @@ using Hahn.ApplicatonProcess.May2020.Data.DbContext;
 using Hahn.ApplicatonProcess.May2020.Data.Repositories;
 using Hahn.ApplicatonProcess.May2020.Domain.Interfaces;
 using Hahn.ApplicatonProcess.May2020.Domain.Managers;
+using Hahn.ApplicatonProcess.May2020.Domain.Mappers;
 using Hahn.ApplicatonProcess.May2020.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -38,6 +39,7 @@ namespace Hahn.ApplicatonProcess.May2020.Api
             services.AddHttpClient();
             services.AddTransient<IValidationManager, ValidationManager>();
             services.AddTransient<IApplicantManager, ApplicantManager>();
+            services.AddTransient<IErrorMapper, ErrorMapper>();
             services.AddTransient<IGenericRepository<Applicant>, GenericRepository<Applicant>>();
             services.AddTransient<ApplicantRepository>();
             services.AddDbContext<HahnDbContext>(options => options.UseInMemoryDatabase("HahnDbContext"));

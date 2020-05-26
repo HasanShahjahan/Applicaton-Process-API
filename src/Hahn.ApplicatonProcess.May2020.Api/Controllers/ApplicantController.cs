@@ -12,10 +12,12 @@ namespace Hahn.ApplicatonProcess.May2020.Api.Controllers
     {
         private readonly IApplicantManager _applicantManager;
         private readonly IValidationManager _validationManager;
-        public ApplicantController(IApplicantManager applicantManager, IValidationManager validationManager)
+        private readonly IErrorMapper _errorMapper;
+        public ApplicantController(IApplicantManager applicantManager, IValidationManager validationManager, IErrorMapper errorMapper)
         {
             _applicantManager = applicantManager;
             _validationManager = validationManager;
+            _errorMapper = errorMapper;
         }
 
         
@@ -33,11 +35,9 @@ namespace Hahn.ApplicatonProcess.May2020.Api.Controllers
         {
             var validationResult = _validationManager.Validate(new ApplicantModelValidator(), request);
             if (validationResult.Errors.Count > 0)
-            {
-                return Ok(validationResult.Errors);    
-            }
-            var result = await _applicantManager.CreateApplicantAsync(request);
-            return Ok(result);
+                return Ok(_errorMapper.MapToError(ServerResponse.BadRequest, validationResult.Errors));
+            var response = await _applicantManager.CreateApplicantAsync(request);
+            return Ok(response);
         }
 
         
@@ -45,8 +45,11 @@ namespace Hahn.ApplicatonProcess.May2020.Api.Controllers
         [Consumes("application/json")]
         public async Task<IActionResult> Put(int id, [FromBody] ApplicantModel request)
         {
-            var result = await _applicantManager.UpdateApplicantAsync(id, request);
-            return Ok(result);
+            var validationResult = _validationManager.Validate(new ApplicantModelValidator(), request);
+            if (validationResult.Errors.Count > 0)
+                return Ok(_errorMapper.MapToError(ServerResponse.BadRequest, validationResult.Errors));
+            var response = await _applicantManager.UpdateApplicantAsync(id, request);
+            return Ok(response);
         }
 
         
