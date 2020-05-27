@@ -23,5 +23,15 @@ namespace Hahn.ApplicatonProcess.May2020.Domain.Mappers
             errorResponse.RespDesc = errorDetail;
             return errorResponse;
         }
+
+        public ApplicantModel MapToError(ApplicantModel model, ServerResponse response, string errorDetail)
+        {
+            ApplicantModel request = new ApplicantModel
+            {
+                RespCode = 400,
+                RespDesc = errorDetail
+            };
+            return request;
+        }
     }
 }

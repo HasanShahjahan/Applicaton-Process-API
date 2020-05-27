@@ -11,5 +11,7 @@ namespace Hahn.ApplicatonProcess.May2020.Domain.Models
         public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
 
         public DateTime? UpdatedDate { get; set; }
+        public int RespCode { get; set; }
+        public string RespDesc { get; set; }
     }
 }
