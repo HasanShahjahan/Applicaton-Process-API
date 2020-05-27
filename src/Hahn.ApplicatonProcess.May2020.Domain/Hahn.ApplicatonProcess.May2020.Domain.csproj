@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="8.6.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Hahn.ApplicatonProcess.May2020.Data\Hahn.ApplicatonProcess.May2020.Data.csproj" />
     <ProjectReference Include="..\Hahn.ApplicatonProcess.May2020.Entities\Hahn.ApplicatonProcess.May2020.Entities.csproj" />
   </ItemGroup>
