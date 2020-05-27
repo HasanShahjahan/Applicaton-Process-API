@@ -3,6 +3,8 @@ using Hahn.ApplicatonProcess.May2020.Domain.Interfaces;
 using Hahn.ApplicatonProcess.May2020.Domain.Models;
 using Hahn.ApplicatonProcess.May2020.Domain.Validators;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 namespace Hahn.ApplicatonProcess.May2020.Api.Controllers
 {
@@ -13,18 +15,22 @@ namespace Hahn.ApplicatonProcess.May2020.Api.Controllers
         private readonly IApplicantManager _applicantManager;
         private readonly IValidationManager _validationManager;
         private readonly IErrorMapper _errorMapper;
-        public ApplicantController(IApplicantManager applicantManager, IValidationManager validationManager, IErrorMapper errorMapper)
+        private readonly ILogger<ApplicantController> _logger;
+        public ApplicantController(IApplicantManager applicantManager, IValidationManager validationManager, IErrorMapper errorMapper, ILogger<ApplicantController> logger)
         {
             _applicantManager = applicantManager;
             _validationManager = validationManager;
             _errorMapper = errorMapper;
+            _logger = logger;
         }
 
         
         [HttpGet("{id}", Name = "Get")]
         public async Task<IActionResult> Get(int id)
         {
+            _logger.LogInformation("Start Get Applicant Information for ID: " + id + ".");
             var result = await _applicantManager.GetApplicantAsync(id);
+            _logger.LogInformation("End Get Applicant Information for ID: " + JsonConvert.SerializeObject(result));
             return Ok(result);
         }
 
@@ -33,11 +39,14 @@ namespace Hahn.ApplicatonProcess.May2020.Api.Controllers
         [Consumes("application/json")]
         public async Task<IActionResult> Post([FromBody] ApplicantModel request)
         {
+            _logger.LogInformation("POST for creating Applicant with request: " + JsonConvert.SerializeObject(request));
             var validationResult = _validationManager.Validate(new ApplicantModelValidator(), request);
             if (validationResult.Errors.Count > 0)
                 return Ok(_errorMapper.MapToError(ServerResponse.BadRequest, validationResult.Errors));
             var response = await _applicantManager.CreateApplicantAsync(request);
+            _logger.LogInformation("POST for creating Applicant with response: " + JsonConvert.SerializeObject(response));
             return Ok(response);
+
         }
 
         
@@ -45,10 +54,12 @@ namespace Hahn.ApplicatonProcess.May2020.Api.Controllers
         [Consumes("application/json")]
         public async Task<IActionResult> Put(int id, [FromBody] ApplicantModel request)
         {
+            _logger.LogInformation("PUT for updating Applicant with request: " + JsonConvert.SerializeObject(request));
             var validationResult = _validationManager.Validate(new ApplicantModelValidator(), request);
             if (validationResult.Errors.Count > 0)
                 return Ok(_errorMapper.MapToError(ServerResponse.BadRequest, validationResult.Errors));
             var response = await _applicantManager.UpdateApplicantAsync(id, request);
+            _logger.LogInformation("PUT for updating Applicant with response: " + JsonConvert.SerializeObject(response));
             return Ok(response);
         }
 
@@ -57,7 +68,9 @@ namespace Hahn.ApplicatonProcess.May2020.Api.Controllers
         [Consumes("application/json")]
         public async Task<IActionResult> Delete(int id)
         {
+            _logger.LogInformation("Start deleting Applicant with ID: " + id);
             var result = await _applicantManager.DeleteApplicantAsync(id);
+            _logger.LogInformation("End deletation Applicant with ID: " + id);
             return Ok(result);
         }
     }
