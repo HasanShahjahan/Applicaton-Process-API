@@ -1,0 +1,78 @@
+<template>
+    <h1>Create Applicant</h1>
+    <form class="form-horizontal" submit.delegate="SaveApplicant()">
+        <div class="row">
+            <div class="form-group">
+                <label for="inputIdName" class="col-sm-2 control-label">ID</label>
+                <div class="col-sm-6">
+                    <input type="text" value.bind="id" class="form-control" id="inputIdName" placeholder="Please enter valida ID">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <label for="inputName" class="col-sm-2 control-label">Name</label>
+                <div class="col-sm-6">
+                    <input type="text" value.bind="name" class="form-control" id="inputName" placeholder="Please enter valid Name">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <label for="inputFamilyName" class="col-sm-2 control-label">Family Name</label>
+                <div class="col-sm-6">
+                    <input type="text" value.bind="familyName" class="form-control" id="inputFamilyName" placeholder="Please enter valid Family Name">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <label for="inputAddress" class="col-sm-2 control-label">Address</label>
+                <div class="col-sm-6">
+                    <input type="text" value.bind="address" class="form-control" id="inputAddress" placeholder="Please enter valid Address">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <label for="inputCountryOfOrigin" class="col-sm-2 control-label">Country Of Origin</label>
+                <div class="col-sm-6">
+                    <input type="text" value.bind="countryOfOrigin" class="form-control" id="inputCountryOfOrigin" placeholder="Please enter valid Country Of Origin">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <label for="inputEmailAdress" class="col-sm-2 control-label">Email Address</label>
+                <div class="col-sm-6">
+                    <input type="text" value.bind="emailAdress" class="form-control" id="inputEmailAdress" placeholder="Please enter valid Email Adress">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <label for="inputAge" class="col-sm-2 control-label">Age</label>
+                <div class="col-sm-6">
+                    <input type="text" value.bind="age" class="form-control" id="inputAge" placeholder="Please enter valid Email Age">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <label for="inputHired" class="col-sm-2 control-label">Hired</label>
+                <div class="col-sm-6">
+                    <input type="checkbox" value.bind="hired" name="vehicle1" id="inputHired">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="reset" class="btn btn-default">Reset</button>
+                </div>
+
+            </div>
+        </div>
+    </form>
+</template>

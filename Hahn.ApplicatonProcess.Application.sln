@@ -9,15 +9,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{E3E9F81A-43C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{90A51F54-D0D6-4BE7-97DF-721040DBA1EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hahn.ApplicatonProcess.May2020.Data", "src\Hahn.ApplicatonProcess.May2020.Data\Hahn.ApplicatonProcess.May2020.Data.csproj", "{BD056F81-A2E8-43F5-8EFB-1A13A6C24C03}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hahn.ApplicatonProcess.May2020.Data", "src\Hahn.ApplicatonProcess.May2020.Data\Hahn.ApplicatonProcess.May2020.Data.csproj", "{BD056F81-A2E8-43F5-8EFB-1A13A6C24C03}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hahn.ApplicatonProcess.May2020.Web", "src\Hahn.ApplicatonProcess.May2020.Web\Hahn.ApplicatonProcess.May2020.Web.csproj", "{C69468A3-355F-4268-8A4E-7C5187691092}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hahn.ApplicatonProcess.May2020.Domain", "src\Hahn.ApplicatonProcess.May2020.Domain\Hahn.ApplicatonProcess.May2020.Domain.csproj", "{D6E1BF4F-C416-4333-924F-7EA4EDBA9423}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hahn.ApplicatonProcess.May2020.Domain", "src\Hahn.ApplicatonProcess.May2020.Domain\Hahn.ApplicatonProcess.May2020.Domain.csproj", "{D6E1BF4F-C416-4333-924F-7EA4EDBA9423}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hahn.ApplicatonProcess.May2020.Entities", "src\Hahn.ApplicatonProcess.May2020.Entities\Hahn.ApplicatonProcess.May2020.Entities.csproj", "{68646817-D16A-4408-80DB-C5D9913B3AFC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hahn.ApplicatonProcess.May2020.Entities", "src\Hahn.ApplicatonProcess.May2020.Entities\Hahn.ApplicatonProcess.May2020.Entities.csproj", "{68646817-D16A-4408-80DB-C5D9913B3AFC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hahn.ApplicatonProcess.May2020.Api", "src\Hahn.ApplicatonProcess.May2020.Api\Hahn.ApplicatonProcess.May2020.Api.csproj", "{F1378652-268D-4B02-AFA0-B10C10FE8448}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hahn.ApplicatonProcess.May2020.Api", "src\Hahn.ApplicatonProcess.May2020.Api\Hahn.ApplicatonProcess.May2020.Api.csproj", "{F1378652-268D-4B02-AFA0-B10C10FE8448}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hahn.ApplicatonProcess.May2020.WebApp", "src\Hahn.ApplicatonProcess.May2020.Web\Hahn.ApplicatonProcess.May2020.WebApp.csproj", "{057BD2AF-FC90-4E02-8A38-78243045F4B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hahn.ApplicatonProcess.May2020.Domain.UnitTest", "tests\Hahn.ApplicatonProcess.May2020.Domain.UnitTest\Hahn.ApplicatonProcess.May2020.Domain.UnitTest.csproj", "{01E20436-E0F7-434C-AAB7-2098E116FE32}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +31,6 @@ Global
 		{BD056F81-A2E8-43F5-8EFB-1A13A6C24C03}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD056F81-A2E8-43F5-8EFB-1A13A6C24C03}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD056F81-A2E8-43F5-8EFB-1A13A6C24C03}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C69468A3-355F-4268-8A4E-7C5187691092}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C69468A3-355F-4268-8A4E-7C5187691092}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C69468A3-355F-4268-8A4E-7C5187691092}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C69468A3-355F-4268-8A4E-7C5187691092}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D6E1BF4F-C416-4333-924F-7EA4EDBA9423}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D6E1BF4F-C416-4333-924F-7EA4EDBA9423}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6E1BF4F-C416-4333-924F-7EA4EDBA9423}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,16 +43,25 @@ Global
 		{F1378652-268D-4B02-AFA0-B10C10FE8448}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1378652-268D-4B02-AFA0-B10C10FE8448}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F1378652-268D-4B02-AFA0-B10C10FE8448}.Release|Any CPU.Build.0 = Release|Any CPU
+		{057BD2AF-FC90-4E02-8A38-78243045F4B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{057BD2AF-FC90-4E02-8A38-78243045F4B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{057BD2AF-FC90-4E02-8A38-78243045F4B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{057BD2AF-FC90-4E02-8A38-78243045F4B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01E20436-E0F7-434C-AAB7-2098E116FE32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01E20436-E0F7-434C-AAB7-2098E116FE32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01E20436-E0F7-434C-AAB7-2098E116FE32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01E20436-E0F7-434C-AAB7-2098E116FE32}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{BD056F81-A2E8-43F5-8EFB-1A13A6C24C03} = {E3E9F81A-43C1-4ADC-B067-3BDB939840BC}
-		{C69468A3-355F-4268-8A4E-7C5187691092} = {E3E9F81A-43C1-4ADC-B067-3BDB939840BC}
 		{D6E1BF4F-C416-4333-924F-7EA4EDBA9423} = {E3E9F81A-43C1-4ADC-B067-3BDB939840BC}
 		{68646817-D16A-4408-80DB-C5D9913B3AFC} = {E3E9F81A-43C1-4ADC-B067-3BDB939840BC}
 		{F1378652-268D-4B02-AFA0-B10C10FE8448} = {E3E9F81A-43C1-4ADC-B067-3BDB939840BC}
+		{057BD2AF-FC90-4E02-8A38-78243045F4B5} = {E3E9F81A-43C1-4ADC-B067-3BDB939840BC}
+		{01E20436-E0F7-434C-AAB7-2098E116FE32} = {90A51F54-D0D6-4BE7-97DF-721040DBA1EC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AE48FEAA-95EB-40B2-9A3D-B456BA997FCD}
