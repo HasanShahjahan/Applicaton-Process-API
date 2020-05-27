@@ -82,7 +82,11 @@ namespace Hahn.ApplicatonProcess.May2020.Domain.Managers
         public async Task<ApplicantModel> GetApplicantAsync(int Id)
         {
             var applicant = await _applicantRepository.GetItemByIdAsync(Id);
-            if (applicant == null) throw new HahnExceptionManager(401, "Doesn't exist in system.");
+            if (applicant == null)
+            {
+                _logger.LogInformation("Applicant doesn't exist in system.");
+                return _errorMapper.MapToError(null, ServerResponse.BadRequest, "Applicant doesn't exist in system.");
+            }
             var applicantEntity = await _applicantRepository.GetItemByIdAsync(Id);
             return applicantEntity.ToQueries();
         }
