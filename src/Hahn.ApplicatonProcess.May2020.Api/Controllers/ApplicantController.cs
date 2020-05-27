@@ -2,6 +2,7 @@
 using Hahn.ApplicatonProcess.May2020.Domain.Interfaces;
 using Hahn.ApplicatonProcess.May2020.Domain.Models;
 using Hahn.ApplicatonProcess.May2020.Domain.Validators;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -24,7 +25,13 @@ namespace Hahn.ApplicatonProcess.May2020.Api.Controllers
             _logger = logger;
         }
 
-        
+        /// <summary>
+        /// Get an Applicant By Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>A Applicant get </returns>
+        /// <response code="201">Returns item</response>
+        /// <response code="400">If the item is null</response>   
         [HttpGet("{id}", Name = "Get")]
         public async Task<IActionResult> Get(int id)
         {
@@ -34,8 +41,31 @@ namespace Hahn.ApplicatonProcess.May2020.Api.Controllers
             return Ok(result);
         }
 
-        
+        /// <summary>
+        /// Create an Applicant
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     {
+        ///        "ID": 1,
+        ///        "Name": "Md Shahjahan Miah",
+        ///        "FamilyName": "Miahhhhh",
+        ///        "Address": "Bangkok,Thailand",
+        ///        "CountryOfOrigin": "Bangladesh",
+        ///        "EMailAdress": "blackbee08@gmail.com",
+        ///        "Age": 33,
+        ///        "Hired": true
+        ///     }
+        ///
+        /// </remarks>
+        /// <param name="request"></param>
+        /// <returns>A newly created Applicant</returns>
+        /// <response code="201">Returns the newly created item</response>
+        /// <response code="400">If the item is null</response>         
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [Consumes("application/json")]
         public async Task<IActionResult> Post([FromBody] ApplicantModel request)
         {
@@ -49,8 +79,31 @@ namespace Hahn.ApplicatonProcess.May2020.Api.Controllers
 
         }
 
-        
+        /// <summary>
+        /// Update an Applicant
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     {
+        ///        "ID": 1,
+        ///        "Name": "Miah Md Shahjahan ",
+        ///        "FamilyName": "Miahhhhh",
+        ///        "Address": "Bangkok,Thailand",
+        ///        "CountryOfOrigin": "Bangladesh",
+        ///        "EMailAdress": "blackbee08@gmail.com",
+        ///        "Age": 43,
+        ///        "Hired": true
+        ///     }
+        ///
+        /// </remarks>
+        /// <param name="request"></param>
+        /// <returns>A update Applicant</returns>
+        /// <response code="201">Returns updated item</response>
+        /// <response code="400">If the item is null</response>   
         [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [Consumes("application/json")]
         public async Task<IActionResult> Put(int id, [FromBody] ApplicantModel request)
         {
@@ -63,8 +116,16 @@ namespace Hahn.ApplicatonProcess.May2020.Api.Controllers
             return Ok(response);
         }
 
-        
+        /// <summary>
+        /// Delete an Applicant
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Delete  Applicant status </returns>
+        /// <response code="201">Returns deleted status item</response>
+        /// <response code="400">If the item is null</response>   
         [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [Consumes("application/json")]
         public async Task<IActionResult> Delete(int id)
         {

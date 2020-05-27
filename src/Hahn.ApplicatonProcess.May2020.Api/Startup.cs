@@ -14,6 +14,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Serilog;
+using System;
+using System.IO;
+using System.Reflection;
 
 namespace Hahn.ApplicatonProcess.May2020.Api
 {
@@ -47,6 +50,9 @@ namespace Hahn.ApplicatonProcess.May2020.Api
                         Description = "API for Hahn Applicant Process",
                         Version = "v1"
                     });
+                var fileName = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var filePath = Path.Combine(AppContext.BaseDirectory,fileName);
+                options.IncludeXmlComments(filePath);
             });
         }
 
