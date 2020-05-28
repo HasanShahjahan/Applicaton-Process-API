@@ -48,14 +48,14 @@ namespace Hahn.ApplicatonProcess.May2020.Api.Controllers
         /// Sample request:
         ///
         ///     {
-        ///        "ID": 1,
-        ///        "Name": "Md Shahjahan Miah",
-        ///        "FamilyName": "Miahhhhh",
-        ///        "Address": "Bangkok,Thailand",
-        ///        "CountryOfOrigin": "Bangladesh",
-        ///        "EMailAdress": "blackbee08@gmail.com",
-        ///        "Age": 33,
-        ///        "Hired": true
+        ///        "id": 1,
+        ///        "name": "Md Shahjahan Miah",
+        ///        "familyName": "Miahhhhh",
+        ///        "address": "Bangkok,Thailand",
+        ///        "countryOfOrigin": "Bangladesh",
+        ///        "emailAdress": "blackbee08@gmail.com",
+        ///        "age": 33,
+        ///        "hired": true
         ///     }
         ///
         /// </remarks>
@@ -86,14 +86,14 @@ namespace Hahn.ApplicatonProcess.May2020.Api.Controllers
         /// Sample request:
         ///
         ///     {
-        ///        "ID": 1,
-        ///        "Name": "Miah Md Shahjahan ",
-        ///        "FamilyName": "Miahhhhh",
-        ///        "Address": "Bangkok,Thailand",
-        ///        "CountryOfOrigin": "Bangladesh",
-        ///        "EMailAdress": "blackbee08@gmail.com",
-        ///        "Age": 43,
-        ///        "Hired": true
+        ///        "id": 1,
+        ///        "name": "Miah Md Shahjahan ",
+        ///        "familyName": "Miahhhhh",
+        ///        "address": "Bangkok,Thailand",
+        ///        "countryOfOrigin": "Bangladesh",
+        ///        "emailAdress": "blackbee08@gmail.com",
+        ///        "age": 43,
+        ///        "hired": true
         ///     }
         ///
         /// </remarks>

@@ -54,6 +54,13 @@ namespace Hahn.ApplicatonProcess.May2020.Api
                 var filePath = Path.Combine(AppContext.BaseDirectory,fileName);
                 options.IncludeXmlComments(filePath);
             });
+            //services.AddCors(options =>
+            //{
+            //    options.AddPolicy("CorsPolicy",
+            //        builder => builder.AllowAnyOrigin()
+            //        .AllowAnyMethod()
+            //        .AllowAnyHeader()
+            //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -80,6 +87,7 @@ namespace Hahn.ApplicatonProcess.May2020.Api
                 options.SwaggerEndpoint("/swagger/v1/swagger.json", "Hahn Application Process API");
             
             });
+            //app.UseCors("CorsPolicy");
         }
     }
 }
