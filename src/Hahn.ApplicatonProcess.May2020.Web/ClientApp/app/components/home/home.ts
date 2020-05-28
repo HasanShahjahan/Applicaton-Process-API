@@ -37,8 +37,8 @@ export class Home {
             }
         })
             .then(response => response.json())
-            .then(createdBook => {
-                return createdBook;
+            .then(createdApplicant => {
+                return createdApplicant;
             })
             .catch(error => {
                 console.log('Error adding applicant.');

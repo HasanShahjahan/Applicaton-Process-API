@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "1f2f0d9a1955166e986e"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "b26f0d4a3832d05e3cb0"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -21188,8 +21188,8 @@ var Home = (function () {
             }
         })
             .then(function (response) { return response.json(); })
-            .then(function (createdBook) {
-            return createdBook;
+            .then(function (createdApplicant) {
+            return createdApplicant;
         })
             .catch(function (error) {
             console.log('Error adding applicant.');
