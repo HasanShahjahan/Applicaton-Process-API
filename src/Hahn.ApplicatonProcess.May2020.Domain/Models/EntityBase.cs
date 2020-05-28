@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,12 +7,12 @@ namespace Hahn.ApplicatonProcess.May2020.Domain.Models
 {
     public abstract class EntityBase
     {
-        public int ID { get; set; }
+        [JsonProperty("id")]  public int ID { get; set; }
 
-        public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
+        [JsonProperty("createdDate")]  public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
 
-        public DateTime? UpdatedDate { get; set; }
-        public int RespCode { get; set; }
-        public string RespDesc { get; set; }
+        [JsonProperty("updatedDate")]  public DateTime? UpdatedDate { get; set; }
+        [JsonProperty("respCode")]  public int RespCode { get; set; }
+        [JsonProperty("respDesc")]  public string RespDesc { get; set; }
     }
 }

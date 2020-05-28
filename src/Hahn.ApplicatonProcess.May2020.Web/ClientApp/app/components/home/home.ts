@@ -1,8 +1,8 @@
-import { HttpClient } from 'aurelia-fetch-client';
-import { inject } from 'aurelia-framework';
+import { HttpClient, json } from 'aurelia-fetch-client';
 
-@inject(HttpClient)
+let httpClient = new HttpClient();
 export class Home {
+
     id: number = 1;
     name: string = 'Md Shahjahan';
     familyName: string = 'Miahhhh';
@@ -13,7 +13,7 @@ export class Home {
     hired: boolean = true;
 
 
-    SaveApplicant(http: HttpClient) {
+    SaveApplicant() {
         var payload = {
             id: this.id,
             name: this.name,
@@ -24,13 +24,24 @@ export class Home {
             age: this.age,
             hired: this.hired
         }
+        const baseUrl = 'http://localhost:51526/api/';
+        httpClient.baseUrl = baseUrl;
 
-        http.fetch('http://localhost:51526/api/Applicant', {
-            method: "POST",
-            body: JSON.stringify(payload)
-        }).then(response => response.json()).then(data => {
-            console.log(data);
-            alert('Hasan');
-        });
+        return httpClient.fetch('Applicant', {
+            method: 'Post',
+            mode: 'no-cors',
+            body: JSON.stringify(payload),
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
+        })
+            .then(response => response.json())
+            .then(createdBook => {
+                return createdBook;
+            })
+            .catch(error => {
+                console.log('Error adding applicant.');
+            });
     }
 }

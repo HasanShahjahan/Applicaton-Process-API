@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "ad03c96dc5994a610842"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "1f2f0d9a1955166e986e"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -21152,15 +21152,8 @@ module.exports = "<template>\r\n    <require from=\"../navmenu/navmenu.html\"></
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Home", function() { return Home; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_aurelia_fetch_client__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_aurelia_framework__ = __webpack_require__("aurelia-framework");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
 
-
+var httpClient = new __WEBPACK_IMPORTED_MODULE_0_aurelia_fetch_client__["a" /* HttpClient */]();
 var Home = (function () {
     function Home() {
         this.id = 1;
@@ -21172,7 +21165,7 @@ var Home = (function () {
         this.age = 33;
         this.hired = true;
     }
-    Home.prototype.SaveApplicant = function (http) {
+    Home.prototype.SaveApplicant = function () {
         var payload = {
             id: this.id,
             name: this.name,
@@ -21183,25 +21176,27 @@ var Home = (function () {
             age: this.age,
             hired: this.hired
         };
-        http.fetch('http://localhost:51526/api/Applicant/2')
+        var baseUrl = 'http://localhost:51526/api/';
+        httpClient.baseUrl = baseUrl;
+        return httpClient.fetch('Applicant', {
+            method: 'Post',
+            mode: 'no-cors',
+            body: JSON.stringify(payload),
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
+        })
             .then(function (response) { return response.json(); })
-            .then(function (data) {
-            console.log(data);
-            alert('Hasan');
+            .then(function (createdBook) {
+            return createdBook;
+        })
+            .catch(function (error) {
+            console.log('Error adding applicant.');
         });
-        //http.fetch('http://localhost:51526/api/Applicant', {
-        //    method: "POST",
-        //    body: JSON.stringify(payload)
-        //}).then(response => response.json()).then(data => {
-        //    console.log(data);
-        //    alert('Hasan');
-        //});
     };
     return Home;
 }());
-Home = __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_aurelia_framework__["b" /* inject */])(__WEBPACK_IMPORTED_MODULE_0_aurelia_fetch_client__["a" /* HttpClient */])
-], Home);
 
 
 
@@ -21210,7 +21205,7 @@ Home = __decorate([
 /***/ "app/components/home/home.html":
 /***/ (function(module, exports) {
 
-module.exports = "<template>\r\n    <h1>Create Applicant</h1>\r\n    <form class=\"form-horizontal\" submit.delegate=\"SaveApplicant()\">\r\n        <div class=\"row\">\r\n            <div class=\"form-group\">\r\n                <label for=\"inputIdName\" class=\"col-sm-2 control-label\">ID</label>\r\n                <div class=\"col-sm-6\">\r\n                    <input type=\"text\" value.bind=\"id\" class=\"form-control\" id=\"inputIdName\" placeholder=\"Please enter valida ID\">\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"form-group\">\r\n                <label for=\"inputName\" class=\"col-sm-2 control-label\">Name</label>\r\n                <div class=\"col-sm-6\">\r\n                    <input type=\"text\" value.bind=\"name\" class=\"form-control\" id=\"inputName\" placeholder=\"Please enter valid Name\">\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"form-group\">\r\n                <label for=\"inputFamilyName\" class=\"col-sm-2 control-label\">Family Name</label>\r\n                <div class=\"col-sm-6\">\r\n                    <input type=\"text\" value.bind=\"familyName\" class=\"form-control\" id=\"inputFamilyName\" placeholder=\"Please enter valid Family Name\">\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"form-group\">\r\n                <label for=\"inputAddress\" class=\"col-sm-2 control-label\">Address</label>\r\n                <div class=\"col-sm-6\">\r\n                    <input type=\"text\" value.bind=\"address\" class=\"form-control\" id=\"inputAddress\" placeholder=\"Please enter valid Address\">\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"form-group\">\r\n                <label for=\"inputCountryOfOrigin\" class=\"col-sm-2 control-label\">Country Of Origin</label>\r\n                <div class=\"col-sm-6\">\r\n                    <input type=\"text\" value.bind=\"countryOfOrigin\" class=\"form-control\" id=\"inputCountryOfOrigin\" placeholder=\"Please enter valid Country Of Origin\">\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"form-group\">\r\n                <label for=\"inputEmailAdress\" class=\"col-sm-2 control-label\">Email Address</label>\r\n                <div class=\"col-sm-6\">\r\n                    <input type=\"text\" value.bind=\"emailAddress\" class=\"form-control\" id=\"inputEmailAdress\" placeholder=\"Please enter valid Email Adress\">\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"form-group\">\r\n                <label for=\"inputAge\" class=\"col-sm-2 control-label\">Age</label>\r\n                <div class=\"col-sm-6\">\r\n                    <input type=\"text\" value.bind=\"age\" class=\"form-control\" id=\"inputAge\" placeholder=\"Please enter valid Email Age\">\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"form-group\">\r\n                <label for=\"inputHired\" class=\"col-sm-2 control-label\">Hired</label>\r\n                <div class=\"col-sm-6\">\r\n                    <input type=\"checkbox\" checked.bind=\"hired\" name=\"hired\" id=\"inputHired\">\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"form-group\">\r\n                <div class=\"col-sm-offset-2 col-sm-10\">\r\n                    <button type=\"submit\" class=\"btn btn-primary\">Save</button>\r\n                    <button type=\"reset\" class=\"btn btn-default\">Reset</button>\r\n                </div>\r\n\r\n            </div>\r\n        </div>\r\n    </form>\r\n</template>\r\n";
+module.exports = "<template>\r\n    <h1>Create Applicant</h1>\r\n    <form class=\"form-horizontal\" submit.delegate=\"SaveApplicant()\" enctype=\"multipart/form-data\">\r\n        <div class=\"row\">\r\n            <div class=\"form-group\">\r\n                <label for=\"inputIdName\" class=\"col-sm-2 control-label\">ID</label>\r\n                <div class=\"col-sm-6\">\r\n                    <input type=\"text\" value.bind=\"id\" class=\"form-control\" id=\"inputIdName\" placeholder=\"Please enter valida ID\">\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"form-group\">\r\n                <label for=\"inputName\" class=\"col-sm-2 control-label\">Name</label>\r\n                <div class=\"col-sm-6\">\r\n                    <input type=\"text\" value.bind=\"name\" class=\"form-control\" id=\"inputName\" placeholder=\"Please enter valid Name\">\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"form-group\">\r\n                <label for=\"inputFamilyName\" class=\"col-sm-2 control-label\">Family Name</label>\r\n                <div class=\"col-sm-6\">\r\n                    <input type=\"text\" value.bind=\"familyName\" class=\"form-control\" id=\"inputFamilyName\" placeholder=\"Please enter valid Family Name\">\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"form-group\">\r\n                <label for=\"inputAddress\" class=\"col-sm-2 control-label\">Address</label>\r\n                <div class=\"col-sm-6\">\r\n                    <input type=\"text\" value.bind=\"address\" class=\"form-control\" id=\"inputAddress\" placeholder=\"Please enter valid Address\">\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"form-group\">\r\n                <label for=\"inputCountryOfOrigin\" class=\"col-sm-2 control-label\">Country Of Origin</label>\r\n                <div class=\"col-sm-6\">\r\n                    <input type=\"text\" value.bind=\"countryOfOrigin\" class=\"form-control\" id=\"inputCountryOfOrigin\" placeholder=\"Please enter valid Country Of Origin\">\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"form-group\">\r\n                <label for=\"inputEmailAdress\" class=\"col-sm-2 control-label\">Email Address</label>\r\n                <div class=\"col-sm-6\">\r\n                    <input type=\"text\" value.bind=\"emailAddress\" class=\"form-control\" id=\"inputEmailAdress\" placeholder=\"Please enter valid Email Adress\">\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"form-group\">\r\n                <label for=\"inputAge\" class=\"col-sm-2 control-label\">Age</label>\r\n                <div class=\"col-sm-6\">\r\n                    <input type=\"text\" value.bind=\"age\" class=\"form-control\" id=\"inputAge\" placeholder=\"Please enter valid Email Age\">\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"form-group\">\r\n                <label for=\"inputHired\" class=\"col-sm-2 control-label\">Hired</label>\r\n                <div class=\"col-sm-6\">\r\n                    <input type=\"checkbox\" checked.bind=\"hired\" name=\"hired\" id=\"inputHired\">\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"form-group\">\r\n                <div class=\"col-sm-offset-2 col-sm-10\">\r\n                    <button type=\"submit\" class=\"btn btn-primary\">Save</button>\r\n                    <button type=\"reset\" class=\"btn btn-default\">Reset</button>\r\n                </div>\r\n\r\n            </div>\r\n        </div>\r\n    </form>\r\n</template>\r\n";
 
 /***/ }),
 
@@ -21396,7 +21391,7 @@ function configure(config) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_aurelia_templating__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_aurelia_pal__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_aurelia_path__ = __webpack_require__(6);
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_1_aurelia_dependency_injection__["b"]; });
+/* unused harmony namespace reexport */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_aurelia_binding__ = __webpack_require__(3);
 /* unused harmony namespace reexport */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_aurelia_metadata__ = __webpack_require__(4);
